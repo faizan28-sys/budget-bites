@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget-Friendly Recipe Search</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #recipe-list { margin-top: 20px; }
+        .recipe { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Search for Budget-Friendly Recipes</h1>
+    <input type="text" id="search-input" placeholder="Type a recipe..." />
+    <button id="search-button">Search</button>
+    <div id="recipe-list"></div>
+
+    <script>
+        const recipes = [
+            { name: 'Spaghetti', ingredients: ['Pasta', 'Tomato Sauce', 'Garlic'], prices: [2, 1.5, 0.5] },
+            { name: 'Fried Rice', ingredients: ['Rice', 'Egg', 'Carrots'], prices: [1, 0.5, 0.5] },
+            { name: 'Vegetable Soup', ingredients: ['Vegetables', 'Broth', 'Spices'], prices: [3, 1, 0.5] }
+        ];
+
+        document.getElementById('search-button').onclick = function() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const resultDiv = document.getElementById('recipe-list');
+            resultDiv.innerHTML = '';
+            const filteredRecipes = recipes.filter(r => r.name.toLowerCase().includes(query));
+            filteredRecipes.forEach(recipe => {
+                const recipeDiv = document.createElement('div');
+                recipeDiv.className = 'recipe';
+                recipeDiv.innerHTML = `<h3>${recipe.name}</h3><p>Ingredients: ${recipe.ingredients.join(', ')}</p><p>Estimated Prices: $${recipe.prices.join(', $')}</p>`;
+                resultDiv.appendChild(recipeDiv);
+            });
+        };
+    </script>
+</body>
+</html>
